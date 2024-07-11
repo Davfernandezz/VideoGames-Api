@@ -7,4 +7,4 @@ router.post('/', createGame)
 router.get('/', getAllGames)
 router.delete('/:id', deleteGame)
 
-export {router}
+export { router }

@@ -41,7 +41,7 @@ export const createGame = async (req, res) => {
 }
 
 //GET
-export const getAllGames = async (req, res) => { 
+export const getAllGames = async (req, res) => {
     try {
         const games = await Game.find()
 
@@ -61,36 +61,36 @@ export const getAllGames = async (req, res) => {
 }
 
 //DELETE
-export const deleteGame = async(req, res) =>{
+export const deleteGame = async (req, res) => {
     try {
-        const idDelete= req.params.id
-        const idToDeleteValid= Types.ObjectId.isValid(idDelete)
+        const idDelete = req.params.id
+        const idToDeleteValid = Types.ObjectId.isValid(idDelete)
 
-        if(!idToDeleteValid){
+        if (!idToDeleteValid) {
             return res.status(400).json({
-                success:false,
-                message:"Id not valid"
+                success: false,
+                message: "Id not valid"
             })
         }
 
-        const deletedGame =await Game.findByIdAndDelete(idDelete)
-        if(!deletedGame){
+        const deletedGame = await Game.findByIdAndDelete(idDelete)
+        if (!deletedGame) {
             return res.status(404).json({
-                succes:false,
-                message:"Not Game found"
+                succes: false,
+                message: "Not Game found"
             })
         }
 
         res.status(200).json({
-            success:true,
-            message:"Game deleted",
+            success: true,
+            message: "Game deleted",
         })
-        
+
     } catch (error) {
         return res.status(500).json({
-            success:false,
-            message:"Error deleting games",
-            error:error.message
+            success: false,
+            message: "Error deleting games",
+            error: error.message
         })
     }
 }
