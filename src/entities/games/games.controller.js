@@ -45,6 +45,11 @@ export const getAllGames = async (req, res) => {
                 path: 'userFavourites',
                 select: "-password"
             })
+            .populate(
+                {
+                    path: 'comments'
+                }
+            )
 
         res.status(200).json({
             success: true,

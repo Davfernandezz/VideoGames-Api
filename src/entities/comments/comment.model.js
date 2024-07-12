@@ -8,7 +8,7 @@ const CommentSchema = new Schema(
         },
         user: {
             type: Schema.Types.ObjectId,
-            path: 'User',
+            ref: 'User',
             required: true,
         },
     },
@@ -18,6 +18,6 @@ const CommentSchema = new Schema(
     }
 );
 
-const Comment = model('Comment', GameSchema)
+const Comment = model('Comment', CommentSchema)
 
 export default Comment;

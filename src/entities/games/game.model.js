@@ -16,6 +16,12 @@ const GameSchema = new Schema(
                 ref: 'User'
             }
         ],
+        comments: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Comment'
+            }
+        ],
     },
     {
         timestamps: true,
