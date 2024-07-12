@@ -50,7 +50,6 @@ export const getAllGames = async (req, res) => {
                     path: 'comments'
                 }
             )
-
         res.status(200).json({
             success: true,
             message: "Game retrieved succesfully",
@@ -114,13 +113,31 @@ export const addFavouriteGame = async (req, res) => {
             )
         }
         // game.userFavourites.includes(userId)
-        game.userFavourites.push(userId)
-        const updateGame = await game.save()
+        if (!game.userFavourites.includes(userId)) {
+            game.userFavourites.push(userId)
+            await game.save()
 
+            return res.json({
+                success: true,
+                message: "Game added to favourite",
+            })
+        }
+        // game.userFavourites.splice(game.userFavourites.indexOf(userId, 1),1)
+        // await game.save()
+        await Game.findByIdAndUpdate(
+            gameId,
+            {
+              $pull: {
+                userFavourites: userId
+              }
+            },
+            {
+              new: true
+            }
+          )
         res.json({
             success: true,
-            message: "User added to favourite game",
-            data: updateGame
+            message: "Game deleted from favourites",
         })
     } catch (error) {
         res.status(500).json(

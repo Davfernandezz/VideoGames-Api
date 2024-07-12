@@ -1,6 +1,7 @@
 import Game from "../games/game.model.js"
 import Comment from "./comment.model.js"
 
+//POST
 export const createComment = async (req, res) => {
     try {
         const userId = req.tokenData.id
